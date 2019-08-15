@@ -5,7 +5,9 @@ namespace utilities
 
 	//Constructor which automatically calculates how long to wait between ticks and frames.
 	//Use microseconds for good accuracy.
-	GameTimer::GameTimer(std::int32_t fps, std::int32_t tps) : do_frame(false), do_tick(false), tick(0), fpsSamples(0.f, 0.f, 1.f), tpsSamples(0.f, 0.f, 1.f), sampleInterval(1.f)
+	GameTimer::GameTimer(std::int32_t fps, std::int32_t tps)
+	:	do_frame(false), do_tick(false), tick(0), 
+		fpsSamples{ 0.f, 0.f, 1.f }, tpsSamples{ 0.f, 0.f, 1.f}, sampleInterval(1.f)
 	{
 		this->fps = fps;
 		this->tps = tps;
@@ -33,16 +35,16 @@ namespace utilities
 			do_frame = true;
 
 			//Increment time and count.
-			fpsSamples.x += (microsBetweenFrames / 1000000.0f);
-			++(fpsSamples.y);
+			fpsSamples[0] += (microsBetweenFrames / 1000000.0f);
+			++(fpsSamples[1]);
 
 			//If a second has passed, 
-			if (fpsSamples.x > sampleInterval)
+			if (fpsSamples[0] > sampleInterval)
 			{
 				//Calculate frames per second.
-				fpsSamples.z = fpsSamples.y / fpsSamples.x;
-				fpsSamples.x = 0.f;
-				fpsSamples.y = 0.f;
+				fpsSamples[2] = fpsSamples[1] / fpsSamples[0];
+				fpsSamples[0] = 0.f;
+				fpsSamples[1] = 0.f;
 			}
 		}
 
@@ -55,16 +57,16 @@ namespace utilities
 			do_tick = true;
 
 			//Increment time and count.
-			tpsSamples.x += (microsBetweenTicks / 1000000.0f);
-			++(tpsSamples.y);
+			tpsSamples[0] += (microsBetweenTicks / 1000000.0f);
+			++(tpsSamples[1]);
 
 			//If a second has passed, 
-			if (tpsSamples.x > sampleInterval)
+			if (tpsSamples[0] > sampleInterval)
 			{
 				//Calculate frames per second.
-				tpsSamples.z = tpsSamples.y / tpsSamples.x;
-				tpsSamples.x = 0.f;
-				tpsSamples.y = 0.f;
+				tpsSamples[2] = tpsSamples[1] / tpsSamples[0];
+				tpsSamples[0] = 0.f;
+				tpsSamples[1] = 0.f;
 			}
 		}
 	}
@@ -121,12 +123,12 @@ namespace utilities
 
 	std::float_t GameTimer::getActualFPS() const
 	{
-		return fpsSamples.z;
+		return fpsSamples[2];
 	}
 
 	std::float_t GameTimer::getActualTPS() const
 	{
-		return tpsSamples.z;
+		return tpsSamples[2];
 	}
 
 	bool GameTimer::nextTick() const

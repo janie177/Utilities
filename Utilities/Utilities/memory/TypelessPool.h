@@ -1,5 +1,4 @@
 #pragma once
-#pragma warning(disable : 4311 4302)
 
 #include <cassert>
 #include <vector>
@@ -112,7 +111,7 @@ namespace utilities
 		//Make sure there is free space in the pool
 		if (current < 0)
 		{
-			ErrorUtil::crash("Pool out of memory!");
+			throw std::runtime_error("Pool out of memory!");
 		}
 
 		//Make sure the size of the type specified matches this memory pool's specified size.

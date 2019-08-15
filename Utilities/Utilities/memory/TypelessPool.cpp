@@ -106,7 +106,7 @@ namespace utilities
 		//Set lastFree to now point to the new last element
 		last = index;
 
-		//If the pool was full, and the current next pointer is nullptr, make it point to the correct address now.
+		//If the pool was full, and the current index is -1, make it point to the correct index now.
 		if (current < 0)
 		{
 			current = last;

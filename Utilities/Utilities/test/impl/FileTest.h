@@ -31,7 +31,7 @@ namespace utilities
 
 
 			reader.open();
-			std::cout << "\n\Contents of file part 2:\n";
+			std::cout << "\nContents of file part 2:\n";
 			while (reader.nextLine())
 			{
 				std::cout << reader.getCurrentLine() << "\n";

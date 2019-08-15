@@ -1,5 +1,5 @@
 #include "Timer.h"
-#include "ErrorUtil.h"
+#include <stdexcept>
 
 namespace utilities
 {
@@ -27,7 +27,7 @@ namespace utilities
 			formatted = difference;
 			break;
 		default:
-			ErrorUtil::warn("Trying to read timer with unimplemented format.");
+			throw std::runtime_error("Trying to read timer with unimplemented format.");
 			break;
 		}
 

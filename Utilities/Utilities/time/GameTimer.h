@@ -1,6 +1,7 @@
 #pragma once
 #include <chrono>
-#include <glm/glm.hpp>
+#include <cinttypes>
+#include <cmath>
 
 namespace utilities
 {
@@ -35,8 +36,8 @@ namespace utilities
 		 * Every time a certain time has passed, the sample is updated by dividing total amount of frames/ticks through the time that has passed.
 		 * The result is stored as the third value.
 		 */
-		glm::vec3 fpsSamples;
-		glm::vec3 tpsSamples;
+		float fpsSamples[3];
+		float tpsSamples[3];
 
 		//Interval to take samples at. Defaults to 1 second.
 		std::float_t sampleInterval;
