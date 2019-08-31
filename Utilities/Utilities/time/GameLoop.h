@@ -11,10 +11,10 @@ namespace utilities
 	struct GameLoopData
 	{
 		//Actual FPS.
-		std::float_t fps;
+		std::double_t fps;
 
 		//Actual TPS.
-		std::float_t tps;
+		std::double_t tps;
 
 		//The time in seconds since the last frame.
 		std::float_t deltaFrame;
@@ -36,11 +36,13 @@ namespace utilities
 	/*
 	 * GameLoop class which handles the FPS and TPS control.
 	 * It sleeps the main thread until a tick or frame has to be processed.
+	 * This can be enabled or disabled. On mobile devices, sleeping will result in less battery usage and lower temperatures.
+	 * On a PC, it will likely slow down the FPS because it is not always awakened in time.
 	 */
 	class GameLoop
 	{
 	public:
-		GameLoop(std::uint32_t fps, std::uint32_t tps);
+		GameLoop(std::uint32_t fps, std::uint32_t tps, bool sleep = false);
 
 	public:
 		/*
@@ -68,21 +70,37 @@ namespace utilities
 		void setSampleInterval(std::float_t sampleInterval);
 
 	private:
+		/*
+		 * Take FPS and TPS samples.
+		 */
+		void sample(bool tick, bool frame, std::int64_t tickTime, std::int64_t frameTime);
+
+		/*
+		 * Make a neat package of data to return.
+		 */
+		GameLoopData getData(bool tick, bool frame, std::int64_t deltaTick, std::int64_t deltaFrame);
+
+	private:
+		//Whether or not to sleep.
+		//This is recommended for mobile devices but not PC's.
+		//Sleep is never guaranteed to awaken at the right time.
+		bool sleep;
+
 		//The TPS and FPS targets.
 		std::uint32_t fps;
 		std::uint32_t tps;
 
 		//The TPS and FPS targets converted into seconds.
-		std::float_t tickDelay;
-		std::float_t frameDelay;
+		std::int64_t tickDelay;
+		std::int64_t frameDelay;
 
 		//The current tick number.
 		std::uint64_t currentTick;
 
 		//Timestamps of the last update, last frame and last tick.
-		std::chrono::time_point<std::chrono::high_resolution_clock> currentTime;
 		std::chrono::time_point<std::chrono::high_resolution_clock> lastFrame;
 		std::chrono::time_point<std::chrono::high_resolution_clock> lastTick;
+		std::chrono::duration<std::int64_t, std::micro> lag;
 
 
 		/*

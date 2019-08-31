@@ -9,8 +9,8 @@ namespace utilities
 	public:
 		void onTest() override
 		{
-			//Start a simple game loop with 10 and 3 fps respectively.
-			GameLoop loop(1, 1);
+			//Start a simple game loop.
+			GameLoop loop(145, 61, true);
 			loop.setSampleInterval(3.f);
 
 			for (int i = 0; i < 10000; ++i)
