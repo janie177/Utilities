@@ -22,3 +22,21 @@
 [15-08-2019 14-18-27] [Info] Testy mctestface
 [15-08-2019 14-18-27] [Warning] New log entry
 [15-08-2019 14-18-27] [Fatal] Another new log entry.
+[31-08-2019 02-35-21] [Info] Testy mctestface
+[31-08-2019 02-35-21] [Warning] New log entry
+[31-08-2019 02-35-21] [Fatal] Another new log entry.
+[31-08-2019 02-36-32] [Info] Testy mctestface
+[31-08-2019 02-36-32] [Warning] New log entry
+[31-08-2019 02-36-32] [Fatal] Another new log entry.
+[31-08-2019 02-36-45] [Info] Testy mctestface
+[31-08-2019 02-36-45] [Warning] New log entry
+[31-08-2019 02-36-45] [Fatal] Another new log entry.
+[31-08-2019 02-37-08] [Info] Testy mctestface
+[31-08-2019 02-37-08] [Warning] New log entry
+[31-08-2019 02-37-08] [Fatal] Another new log entry.
+[31-08-2019 02-38-35] [Info] Testy mctestface
+[31-08-2019 02-38-35] [Warning] New log entry
+[31-08-2019 02-38-35] [Fatal] Another new log entry.
+[31-08-2019 02-38-48] [Info] Testy mctestface
+[31-08-2019 02-38-48] [Warning] New log entry
+[31-08-2019 02-38-48] [Fatal] Another new log entry.

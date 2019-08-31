@@ -6,8 +6,12 @@
 namespace utilities
 {
 	/*
+	 * USE GAMELOOP INSTEAD. IT IS BETTER IN EVERY WAY.
+	 *
 	 * GameTimer is a class that can keep track of the main game loop.
 	 * It has settings to control FPS and TPS.
+	 * 
+	 * In the update loop, call the update() function.
 	 */
 	class GameTimer {
 	private:
@@ -17,9 +21,9 @@ namespace utilities
 		std::int32_t fps;
 		std::int32_t tps;
 		std::float_t tickDelay;
+		std::float_t frameDelay;
 		std::float_t microsBetweenFrames;
 		std::float_t microsBetweenTicks;
-		std::float_t frameDelay;
 		std::uint64_t tick;
 
 		std::chrono::time_point<std::chrono::high_resolution_clock> lastFrame;

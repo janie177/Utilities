@@ -10,6 +10,7 @@
 #include <vector>
 #include "../test/impl/FileTest.h"
 #include "../test/impl/MPTest.h"
+#include "../test/impl/GameLoopTest.h"
 
 int main()
 {
@@ -25,6 +26,7 @@ int main()
 	 */
 	tests.emplace_back(new FileTest());
 	tests.emplace_back(new MPTest());
+	tests.emplace_back(new GameLoopTest());
 
 
 
