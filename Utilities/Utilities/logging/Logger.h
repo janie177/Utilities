@@ -31,6 +31,8 @@ namespace utilities
 	public:
 		explicit Logger(const std::string& fileName);
 
+		~Logger();
+
 	public:
 		void log(const Severity severity, const std::string& message) const;
 
@@ -78,6 +80,11 @@ namespace utilities
 		logged.reserve(flushCap);
 	}
 
+	inline Logger::~Logger()
+	{
+		saveToFile();
+	}
+
 	inline void Logger::log(const Severity severity, const std::string& message) const
 	{
 #ifndef NO_LOGGING
@@ -109,6 +116,7 @@ namespace utilities
 			{
 				std::cout << msg << std::endl;
 			}
+
 			if(logToFile)
 			{
 				logged.emplace_back(msg + "\n");

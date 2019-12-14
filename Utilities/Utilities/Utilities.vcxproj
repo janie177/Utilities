@@ -157,6 +157,7 @@
     <ClInclude Include="test\impl\FileTest.h" />
     <ClInclude Include="test\impl\GameLoopTest.h" />
     <ClInclude Include="test\impl\MPTest.h" />
+    <ClInclude Include="test\impl\StateTest.h" />
     <ClInclude Include="test\Test.h" />
     <ClInclude Include="threads\ThreadPool.h" />
     <ClInclude Include="time\GameLoop.h" />

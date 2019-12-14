@@ -110,5 +110,8 @@
     <ClInclude Include="test\impl\GameLoopTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="test\impl\StateTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

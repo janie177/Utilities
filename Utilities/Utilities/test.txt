@@ -115,3 +115,9 @@
 [31-08-2019 19-05-17] [Info] Testy mctestface
 [31-08-2019 19-05-17] [Warning] New log entry
 [31-08-2019 19-05-17] [Fatal] Another new log entry.
+[05-09-2019 14-59-45] [Info] Testy mctestface
+[05-09-2019 14-59-45] [Warning] New log entry
+[05-09-2019 14-59-45] [Fatal] Another new log entry.
+[05-09-2019 15-01-56] [Info] Testy mctestface
+[05-09-2019 15-01-56] [Warning] New log entry
+[05-09-2019 15-01-56] [Fatal] Another new log entry.

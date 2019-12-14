@@ -11,6 +11,7 @@
 #include "../test/impl/FileTest.h"
 #include "../test/impl/MPTest.h"
 #include "../test/impl/GameLoopTest.h"
+#include "../test/impl/StateTest.h"
 
 int main()
 {
@@ -27,6 +28,7 @@ int main()
 	tests.emplace_back(new FileTest());
 	tests.emplace_back(new MPTest());
 	tests.emplace_back(new GameLoopTest());
+	tests.emplace_back(new StateTest());
 
 
 

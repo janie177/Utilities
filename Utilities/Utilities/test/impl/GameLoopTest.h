@@ -13,7 +13,7 @@ namespace utilities
 			GameLoop loop(145, 61, true);
 			loop.setSampleInterval(3.f);
 
-			for (int i = 0; i < 10000; ++i)
+			for (int i = 0; i < 500; ++i)
 			{
 				const auto result = loop.update();
 
