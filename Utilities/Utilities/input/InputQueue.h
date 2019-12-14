@@ -25,6 +25,7 @@ namespace utilities
 		HELD_DOWN,
 		PRESSED_RELEASED,
 		NOT_PRESSED,
+		FIRST_PRESSED,
 	};
 
 	/*

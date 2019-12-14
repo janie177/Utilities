@@ -37,6 +37,12 @@ namespace utilities
 			{
 				keyStates[i] = ButtonState::NOT_PRESSED;
 			}
+
+			//First pressed keys now become held down.
+			if (state == ButtonState::FIRST_PRESSED)
+			{
+				keyStates[i] = ButtonState::HELD_DOWN;
+			}
 		}
 
 		//Copy the mouse states over.
@@ -82,11 +88,14 @@ namespace utilities
 	{
 		//Mouse buttons can be held down between queries.
 		//This keeps track of that state and only changes it once it has been released.
-		if(event.action == MouseAction::CLICK)
+		if (event.action == MouseAction::CLICK)
 		{
-			mouseStates[static_cast<uint16_t>(event.button)] = ButtonState::HELD_DOWN;
+			if (mouseStates[static_cast<uint16_t>(event.button)] != ButtonState::HELD_DOWN)
+			{
+				mouseStates[static_cast<uint16_t>(event.button)] = ButtonState::FIRST_PRESSED;
+			}
 		}
-		else if(event.action == MouseAction::RELEASE)
+		else if (event.action == MouseAction::RELEASE)
 		{
 			mouseStates[static_cast<uint16_t>(event.button)] = ButtonState::PRESSED_RELEASED;
 		}
@@ -97,7 +106,7 @@ namespace utilities
 	void InputData::addKeyboardEvent(const KeyboardEvent& event)
 	{
 		//Invalid or unknown keys are skipped.
-		if(event.keyCode < 0 || event.keyCode > 511)
+		if (event.keyCode < 0 || event.keyCode > 511)
 		{
 			return;
 		}
@@ -105,15 +114,18 @@ namespace utilities
 		//Keys can be held down for several ticks.
 		//This keeps track of state until a button was released.
 		//Only then will the key state change.
-		if(event.action == KeyboardAction::KEY_PRESSED)
+		if (event.action == KeyboardAction::KEY_PRESSED)
 		{
-			keyStates[event.keyCode] = ButtonState::HELD_DOWN;
+			if (keyStates[event.keyCode] != ButtonState::HELD_DOWN)
+			{
+				keyStates[event.keyCode] = ButtonState::FIRST_PRESSED;
+			}
 		}
-		else if(event.action == KeyboardAction::KEY_RELEASED)
+		else if (event.action == KeyboardAction::KEY_RELEASED)
 		{
 			keyStates[event.keyCode] = ButtonState::PRESSED_RELEASED;
 		}
-		
+
 		keyboardEvents.push(event);
 	}
 
