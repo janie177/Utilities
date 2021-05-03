@@ -14,7 +14,7 @@ namespace utilities
 			Logger logger("test.txt");
 			FileReader reader("test.txt");
 
-			logger.log(Severity::INFO, "Testy mctestface");
+			logger.log(Severity::Info, "Testy mctestface");
 			logger.saveToFile();
 
 			reader.open();
@@ -25,8 +25,8 @@ namespace utilities
 			}
 			reader.close();
 
-			logger.log(Severity::WARNING, "New log entry");
-			logger.log(Severity::FATAL, "Another new log entry.");
+			logger.log(Severity::Warning, "New log entry");
+			logger.log(Severity::Fatal, "Another new log entry.");
 			logger.saveToFile();
 
 

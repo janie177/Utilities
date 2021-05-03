@@ -56,7 +56,7 @@ namespace utilities
 #ifndef NDEBUG
 		if (instance.data == nullptr)
 		{
-			ErrorUtil::crash("Error: Service locator of type " + std::string(typeid(T).name()) + " had no data associated.");
+			throw std::runtime_error("Trying to access service locator service that was not set.");
 		}
 #endif
 		return *(instance.data);

@@ -124,3 +124,6 @@
 [14-12-2019 17-37-53] [Info] Testy mctestface
 [14-12-2019 17-37-53] [Warning] New log entry
 [14-12-2019 17-37-53] [Fatal] Another new log entry.
+[03-05-2021 20-17-39] [Info] Testy mctestface
+[03-05-2021 20-17-39] [Error] New log entry
+[03-05-2021 20-17-39] [Fatal] Another new log entry.

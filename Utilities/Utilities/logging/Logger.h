@@ -8,6 +8,9 @@
 #include <sstream>
 #include <iomanip>
 
+
+#include "../file/FileUtilities.h"
+
 namespace utilities
 {
 	/*
@@ -18,9 +21,10 @@ namespace utilities
 	 */
 	enum class Severity : std::uint8_t
 	{
-		INFO = 0,		//Info is just information.
-		WARNING = 1,	//Warnings should be resolved, but don't directly affect the program in a bad way.
-		FATAL = 2		//Fatal 
+		Info = 0,		//Info is just information.
+		Warning = 1,	//Warnings should be resolved, but don't directly affect the program in a bad way.
+	    Error = 2,		//Something went wrong and program execution is compromised, but can continue.
+		Fatal = 3		//Fatal indicates the program should stop executing because it is beyond repair.
 	};
 
 	/*
@@ -35,6 +39,9 @@ namespace utilities
 
 	public:
 		void log(const Severity severity, const std::string& message) const;
+
+		template<typename... Tags>
+		void log(const Severity severity, const std::string& message, Tags const&... tags) const;
 
 		/*
 		 * Enable or disable console logging.
@@ -75,9 +82,31 @@ namespace utilities
 		mutable std::mutex mutex;
 	};
 
-	inline Logger::Logger(const std::string& fileName) : fileName(fileName), timeStamp(true), logToFile(true), logToConsole(true), flushCap(100)
+    template <typename ... Tags>
+    void Logger::log(const Severity severity, const std::string& message, Tags const&... tags) const
+    {
+#ifndef NO_LOGGING
+		//Thanks stackoverflow! 
+		std::ostringstream stream;
+		using List = int[];
+		(void)List {
+			0, ((void)(stream << "[" << tags << "]"), 0) ...
+		};
+		stream << " " << message;
+		log(severity, stream.str());
+
+#endif
+    }
+
+    inline Logger::Logger(const std::string& fileName) : fileName(fileName), timeStamp(true), logToFile(true), logToConsole(true), flushCap(100)
 	{
 		logged.reserve(flushCap);
+
+		//Creat the log file if it doesn't exist yet.
+		if (!FileUtilities::FileExists(fileName))
+		{
+			FileUtilities::CreateFile(fileName);
+		}
 	}
 
 	inline Logger::~Logger()
@@ -93,7 +122,7 @@ namespace utilities
 		std::lock_guard<std::mutex> lock(mutex);
 
 		//Static array of prefixes.
-		static const std::string prefixes[3] = { "[Info] ", "[Warning] ", "[Fatal] " };
+		static const std::string prefixes[4] = { "[Info] ", "[Error] ", "[Warning] ", "[Fatal] " };
 
 		if(logToConsole || logToFile)
 		{
